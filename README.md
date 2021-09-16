@@ -57,13 +57,23 @@ root@vagrant:~# dpkg -L bpfcc-tools | grep sbin/opensnoop
 565    dbus-daemon        18   0 /var/lib/snapd/dbus-1/system-services/
 
 6. Какой системный вызов использует uname -a? Приведите цитату из man по этому системному вызову, где описывается альтернативное местоположение в /proc, где можно узнать версию ядра и релиз ОС.
+Ответ: uname
+Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}.
 
 7. Чем отличается последовательность команд через ; и через && в bash? Например:
 root@netology1:~# test -d /tmp/some_dir; echo Hi
 Hi
 root@netology1:~# test -d /tmp/some_dir && echo Hi
 root@netology1:~#
+Ответ:
+; выполяет команды по очереди
+&& выполяет команды до первой ошибки
+В первом случае, не смотря на то что такого каталога нет, выводится Hi
+Во втором ошибка останавливает выполнение команд
+
 Есть ли смысл использовать в bash &&, если применить set -e?
+Ответ:
+Нет, это одно и тоже. && и set -e завершают выполнение команды, если возникает ошибка.
 
 8. Из каких опций состоит режим bash set -euxo pipefail и почему его хорошо было бы использовать в сценариях?
 
