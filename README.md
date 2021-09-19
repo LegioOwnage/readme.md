@@ -24,14 +24,9 @@ ping    5105 vagrant    2w   REG  253,0     4798 131090 /home/vagrant/ya2.txt
 sudo lsof -p 5105 | grep ya2.txt
 ping    5105 vagrant    1w   REG  253,0     5934 131090 /home/vagrant/ya2.txt (deleted)
 ping    5105 vagrant    2w   REG  253,0     5934 131090 /home/vagrant/ya2.txt (deleted)
-Дальше как в презентации, пытаюсь восстановить файл: sudo cat /proc/5105/fd/3 > /home/vagrant/ya2.txt
-cat: /proc/5105/fd/3: No such device or address
-vagrant@vagrant:~$ ls
-ya2.txt
-
-Файл создается, но в него ничего не пишется. Команда cat никак не реагирует.
-
-В чем может быть дело?
+Перенаправил потоки вывода на уничтожение:
+sudo cat /proc/5105/fd/1 >/dev/null
+sudo cat /proc/5105/fd/2 >/dev/null
 
 4. Занимают ли зомби-процессы какие-то ресурсы в ОС (CPU, RAM, IO)?
 Ответ: зомби-процессы освобождают память и не нагружают CPU, они лишь хранят запись для того, чтобы родительсикй процесс мог считать запись о их завершении.
